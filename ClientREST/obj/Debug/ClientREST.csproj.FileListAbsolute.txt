@@ -1,0 +1,9 @@
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\bin\Debug\ClientREST.exe.config
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\bin\Debug\ClientREST.exe
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\bin\Debug\ClientREST.pdb
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.csprojResolveAssemblyReference.cache
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.Form1.resources
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.Properties.Resources.resources
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.csproj.GenerateResource.Cache
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.exe
+c:\users\ti15vda\documents\visual studio 2013\Projects\ClientREST\ClientREST\obj\Debug\ClientREST.pdb
