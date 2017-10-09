@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Web.Script.Serialization;
+using MongoDB.Bson;
 
 namespace ClientREST
 {
@@ -19,76 +14,52 @@ namespace ClientREST
             InitializeComponent();
         }
 
-        #region UI Event Handlers
-        private void btConectar_Click(object sender, EventArgs e)
+        public class ConfigSensor
         {
-            //metodo get
-            /*RestClient rClient = new RestClient();
-            rClient.endPoint = tbRequest.Text;
-            string strResponse = string.Empty;
-            strResponse = rClient.makeRequest();
-
-            debugOutput(strResponse);*/
-
-            //metodo post
-            SubmitData();
+            public ObjectId _id { get; set; }
+            public int IdSensor { get; set; }
+            public string Descricao { get; set; }
+            public double Min { get; set; }
+            public double Max { get; set; }
+            public string UnidadeMedida { get; set; }
+            public string Metodo { get; set; }
+            public int VizinhosPadrao { get; set; }
+            public DateTime Data { get; set; }
         }
-        #endregion
 
-        private void SubmitData()
+        private async void btBuscar_ClickAsync(object sender, EventArgs e)
         {
-            try
+            using (HttpClient client = new HttpClient())
             {
-                int idSensor = Convert.ToInt32(tbIdSensor.Text);
-                double valor = Convert.ToDouble(tbValor.Text);
-                double max = Convert.ToDouble(tbMax.Text);
-                double min = Convert.ToDouble(tbMin.Text);
-                int vizinhos = Convert.ToInt32(cbNumViz.SelectedItem.ToString());
-                bool tratamentoTempoReal = (ckTrataTempoReal.Checked) ? true : false;
-                bool popularBaseTeste = (ckPopularBase.Checked) ? true : false;
+                client.BaseAddress = new Uri(tbRequest.Text);
+                var resposta = await client.GetAsync("");
 
-                ASCIIEncoding encoding = new ASCIIEncoding();
-                string postData = "?idSensor=" + idSensor + "&valor=" + valor + "&min=" + min + "&max=" + max + "&redeSensor=" + tratamentoTempoReal + "&vizinhos=" + vizinhos;
+                string dados = await resposta.Content.ReadAsStringAsync();
 
-                byte[] data = encoding.GetBytes(postData);
+                List<ConfigSensor> config = new JavaScriptSerializer().Deserialize<List<ConfigSensor>>(dados);
 
-                WebRequest request = WebRequest.Create(tbRequest.Text);
-                request.Method = "POST";
-                request.ContentType = "application/form-data";
-                request.ContentLength = data.Length;
-
-                Stream stream = request.GetRequestStream();
-                stream.Write(data, 0, data.Length);
-                stream.Close();
-
-                WebResponse response = request.GetResponse();
-                stream = response.GetResponseStream();
-
-                StreamReader sr = new StreamReader(stream);
-
-                MessageBox.Show(sr.ReadToEnd() + "Deu boa");
-
-                sr.Close();
-                stream.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
+                dataGridView1.DataSource = config;
             }
         }
 
-        private void debugOutput(string strDebugText)
+        private async void btInserir_Click(object sender, EventArgs e)
         {
-            try
+            using (HttpClient client = new HttpClient())
             {
-                System.Diagnostics.Debug.Write(strDebugText + Environment.NewLine);
-                tbResposta.Text = tbResposta.Text + strDebugText + Environment.NewLine;
-                tbResposta.SelectionStart = tbResposta.TextLength;
-                tbResposta.ScrollToCaret();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message, ToString() + Environment.NewLine);
+                client.BaseAddress = new Uri(tbRequest.Text);
+
+                ConfigSensor config = new ConfigSensor();
+
+                config.IdSensor = Convert.ToInt32(tbIdSensor.Text);
+                config.Descricao = tbDescricao.Text;
+                config.Min = 4.1;//Convert.ToDouble(tbMin.Text);
+                config.Max = 15.2;//Convert.ToDouble(tbMax.Text);
+                config.UnidadeMedida = tbUnidadeMedida.Text;
+                config.Metodo = tbMetodo.Text;
+                config.VizinhosPadrao = Convert.ToInt32(cbNumViz.SelectedItem.ToString());
+                //config.Data = DateTime.Now;
+
+                var resposta = await client.PostAsXmlAsync("",config);
             }
         }
     }

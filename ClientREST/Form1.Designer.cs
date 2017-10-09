@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btConectar = new System.Windows.Forms.Button();
+            this.btInserir = new System.Windows.Forms.Button();
             this.tbRequest = new System.Windows.Forms.TextBox();
-            this.tbResposta = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,19 +42,26 @@
             this.label6 = new System.Windows.Forms.Label();
             this.ckTrataTempoReal = new System.Windows.Forms.CheckBox();
             this.ckPopularBase = new System.Windows.Forms.CheckBox();
-            this.tbValor = new System.Windows.Forms.TextBox();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btBuscar = new System.Windows.Forms.Button();
+            this.tbUnidadeMedida = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbMetodo = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btConectar
+            // btInserir
             // 
-            this.btConectar.Location = new System.Drawing.Point(115, 192);
-            this.btConectar.Name = "btConectar";
-            this.btConectar.Size = new System.Drawing.Size(75, 23);
-            this.btConectar.TabIndex = 9;
-            this.btConectar.Text = "Ir";
-            this.btConectar.UseVisualStyleBackColor = true;
-            this.btConectar.Click += new System.EventHandler(this.btConectar_Click);
+            this.btInserir.Location = new System.Drawing.Point(115, 254);
+            this.btInserir.Name = "btInserir";
+            this.btInserir.Size = new System.Drawing.Size(75, 23);
+            this.btInserir.TabIndex = 9;
+            this.btInserir.Text = "Inserir";
+            this.btInserir.UseVisualStyleBackColor = true;
+            this.btInserir.Click += new System.EventHandler(this.btInserir_Click);
             // 
             // tbRequest
             // 
@@ -63,15 +69,6 @@
             this.tbRequest.Name = "tbRequest";
             this.tbRequest.Size = new System.Drawing.Size(254, 20);
             this.tbRequest.TabIndex = 1;
-            // 
-            // tbResposta
-            // 
-            this.tbResposta.Location = new System.Drawing.Point(115, 224);
-            this.tbResposta.Multiline = true;
-            this.tbResposta.Name = "tbResposta";
-            this.tbResposta.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbResposta.Size = new System.Drawing.Size(401, 115);
-            this.tbResposta.TabIndex = 10;
             // 
             // label1
             // 
@@ -85,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 227);
+            this.label2.Location = new System.Drawing.Point(19, 289);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 4;
@@ -94,7 +91,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 93);
+            this.label3.Location = new System.Drawing.Point(6, 198);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 13);
             this.label3.TabIndex = 5;
@@ -107,7 +104,7 @@
             "1",
             "2",
             "3"});
-            this.cbNumViz.Location = new System.Drawing.Point(115, 90);
+            this.cbNumViz.Location = new System.Drawing.Point(115, 195);
             this.cbNumViz.Name = "cbNumViz";
             this.cbNumViz.Size = new System.Drawing.Size(39, 21);
             this.cbNumViz.TabIndex = 4;
@@ -115,7 +112,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 120);
+            this.label4.Location = new System.Drawing.Point(40, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 7;
@@ -123,14 +120,14 @@
             // 
             // tbMin
             // 
-            this.tbMin.Location = new System.Drawing.Point(115, 117);
+            this.tbMin.Location = new System.Drawing.Point(115, 91);
             this.tbMin.Name = "tbMin";
             this.tbMin.Size = new System.Drawing.Size(56, 20);
             this.tbMin.TabIndex = 5;
             // 
             // tbMax
             // 
-            this.tbMax.Location = new System.Drawing.Point(115, 143);
+            this.tbMax.Location = new System.Drawing.Point(115, 117);
             this.tbMax.Name = "tbMax";
             this.tbMax.Size = new System.Drawing.Size(56, 20);
             this.tbMax.TabIndex = 6;
@@ -138,7 +135,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 146);
+            this.label5.Location = new System.Drawing.Point(37, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 9;
@@ -163,7 +160,7 @@
             // ckTrataTempoReal
             // 
             this.ckTrataTempoReal.AutoSize = true;
-            this.ckTrataTempoReal.Location = new System.Drawing.Point(115, 169);
+            this.ckTrataTempoReal.Location = new System.Drawing.Point(115, 231);
             this.ckTrataTempoReal.Name = "ckTrataTempoReal";
             this.ckTrataTempoReal.Size = new System.Drawing.Size(149, 17);
             this.ckTrataTempoReal.TabIndex = 7;
@@ -173,35 +170,91 @@
             // ckPopularBase
             // 
             this.ckPopularBase.AutoSize = true;
-            this.ckPopularBase.Location = new System.Drawing.Point(270, 169);
+            this.ckPopularBase.Location = new System.Drawing.Point(270, 231);
             this.ckPopularBase.Name = "ckPopularBase";
             this.ckPopularBase.Size = new System.Drawing.Size(114, 17);
             this.ckPopularBase.TabIndex = 8;
             this.ckPopularBase.Text = "Popular base teste";
             this.ckPopularBase.UseVisualStyleBackColor = true;
             // 
-            // tbValor
+            // tbDescricao
             // 
-            this.tbValor.Location = new System.Drawing.Point(115, 64);
-            this.tbValor.Name = "tbValor";
-            this.tbValor.Size = new System.Drawing.Size(56, 20);
-            this.tbValor.TabIndex = 3;
+            this.tbDescricao.Location = new System.Drawing.Point(115, 64);
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(56, 20);
+            this.tbDescricao.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(75, 67);
+            this.label7.Location = new System.Drawing.Point(48, 67);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Valor:";
+            this.label7.Text = "Descrição: ";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(115, 289);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(393, 150);
+            this.dataGridView1.TabIndex = 15;
+            // 
+            // btBuscar
+            // 
+            this.btBuscar.Location = new System.Drawing.Point(420, 254);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btBuscar.TabIndex = 16;
+            this.btBuscar.Text = "Buscar";
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_ClickAsync);
+            // 
+            // tbUnidadeMedida
+            // 
+            this.tbUnidadeMedida.Location = new System.Drawing.Point(115, 143);
+            this.tbUnidadeMedida.Name = "tbUnidadeMedida";
+            this.tbUnidadeMedida.Size = new System.Drawing.Size(56, 20);
+            this.tbUnidadeMedida.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 146);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Unidade de Medida:";
+            // 
+            // tbMetodo
+            // 
+            this.tbMetodo.Location = new System.Drawing.Point(115, 169);
+            this.tbMetodo.Name = "tbMetodo";
+            this.tbMetodo.Size = new System.Drawing.Size(56, 20);
+            this.tbMetodo.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(63, 172);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Método:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 351);
-            this.Controls.Add(this.tbValor);
+            this.ClientSize = new System.Drawing.Size(520, 449);
+            this.Controls.Add(this.tbMetodo);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.tbUnidadeMedida);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.btBuscar);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.tbDescricao);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ckPopularBase);
             this.Controls.Add(this.ckTrataTempoReal);
@@ -215,11 +268,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbResposta);
             this.Controls.Add(this.tbRequest);
-            this.Controls.Add(this.btConectar);
+            this.Controls.Add(this.btInserir);
             this.Name = "Form1";
             this.Text = "ClientREST";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,9 +280,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btConectar;
+        private System.Windows.Forms.Button btInserir;
         private System.Windows.Forms.TextBox tbRequest;
-        private System.Windows.Forms.TextBox tbResposta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -242,8 +294,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ckTrataTempoReal;
         private System.Windows.Forms.CheckBox ckPopularBase;
-        private System.Windows.Forms.TextBox tbValor;
+        private System.Windows.Forms.TextBox tbDescricao;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btBuscar;
+        private System.Windows.Forms.TextBox tbUnidadeMedida;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbMetodo;
+        private System.Windows.Forms.Label label9;
     }
 }
 
