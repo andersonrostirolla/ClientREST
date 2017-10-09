@@ -4,6 +4,10 @@ using System.Windows.Forms;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using MongoDB.Bson;
+using System.Net.Http.Headers;
+using System.IO;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace ClientREST
 {
@@ -12,19 +16,6 @@ namespace ClientREST
         public Form1()
         {
             InitializeComponent();
-        }
-
-        public class ConfigSensor
-        {
-            public ObjectId _id { get; set; }
-            public int IdSensor { get; set; }
-            public string Descricao { get; set; }
-            public double Min { get; set; }
-            public double Max { get; set; }
-            public string UnidadeMedida { get; set; }
-            public string Metodo { get; set; }
-            public int VizinhosPadrao { get; set; }
-            public DateTime Data { get; set; }
         }
 
         private async void btBuscar_ClickAsync(object sender, EventArgs e)
@@ -59,8 +50,57 @@ namespace ClientREST
                 config.VizinhosPadrao = Convert.ToInt32(cbNumViz.SelectedItem.ToString());
                 //config.Data = DateTime.Now;
 
-                var resposta = await client.PostAsXmlAsync("",config);
+                /*client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var resposta = await client.PostAsync(tbRequest.Text,config);*/
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(config));
+                StringContent content = new StringContent(JsonConvert.SerializeObject(config), Encoding.UTF8, "application/json");
+
+                // HTTP POST
+                HttpResponseMessage response = await client.PostAsync("", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    config = JsonConvert.DeserializeObject<ConfigSensor>(data);
+                }
+
+                /*
+                 using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:99999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(product));
+                    // HTTP POST
+                    HttpResponseMessage response = await client.PostAsync("api/products/save", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string data = await response.Content.ReadAsStringAsync();
+                        product = JsonConvert.DeserializeObject<Product>(data);
+                    }
+                } 
+                */
+
             }
+        }
+
+        public class ConfigSensor
+        {
+            public ObjectId _id { get; set; }
+            public int IdSensor { get; set; }
+            public string Descricao { get; set; }
+            public double Min { get; set; }
+            public double Max { get; set; }
+            public string UnidadeMedida { get; set; }
+            public string Metodo { get; set; }
+            public int VizinhosPadrao { get; set; }
+            public DateTime Data { get; set; }
         }
     }
 }
